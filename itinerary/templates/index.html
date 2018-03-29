@@ -1,0 +1,191 @@
+<!--
+MODIFIED (sourced from W3 schools (links belows))
+
+Authors: Tyler Amos, Alexander Tyan
+-->
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+
+<!-- This entire document is based on: https://www.w3schools.com/w3css/w3css_templates.asp
+It has been heavily modified, mostly through deletion and substitution. Some insertions (checkboxes) have been made. W3Schools tutorials and examples were used extensively. https://www.w3schools.com.  -->
+
+
+<html>
+
+<title>We Can Have Nice Things</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<style>
+
+
+<!-- Create checkboxes -->
+
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+
+ul
+{
+    list-style-type: none;
+}
+
+ul.categorychecklist li {
+        display: inline-block;
+    }
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+</style>
+
+
+
+<body class="w3-black">
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+  <!-- image used (open access) from https://www.pexels.com/photo/table-in-vintage-restaurant-6267/ -->
+  <img src="{% static "/menu-restaurant-vintage-table.jpg" %}" align="middle" alt="Hipster Restaurant" width="100%" height="100%" />
+  <div class="w3-display-middle" style="width:90%">
+    <div class="w3-bar w3-black">
+      
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tab');">We Can Have Nice Things        </button>
+      
+    </div>
+
+    <!-- Tabs -->
+    <div id="Tab" class="w3-container w3-white w3-padding-16 myLink">
+
+            <form method="get">
+                {% csrf_token %}
+                <div class="w3=row">
+                  <div class="w3-quarter">
+                  <label>Where? </label>
+                  {{ form.location }}
+                  </div>
+                  
+                  <div class="w3-quarter">
+                  <label>How much? </label>
+                  {{ form.price }}
+                  </div>
+                
+                  <div class="w3-quarter">
+                  <label>Sort by: </label>
+                  {{ form.sort }}
+                  </div>
+                  </div>
+                
+                
+                  <div class="w3-quarter">
+                  <label>What kind? </label>
+                  {{ form.categories }}
+                  </div>
+                  </div>
+                
+                  <div class="w3=row">
+                  <label>Gender Neutral Restrooms: </label>
+                  {{ form.attributes }}
+                  </div>
+                
+                  <div class="w3-rest">
+                  <label> Don't make us guess... </label>
+                  {{ form.term }}
+                  </div>
+                
+                
+                <p><input type="submit" value="Find" class="w3-button w3-dark-grey"/></p>
+            </form>
+      </div>
+    </div>
+    </div>
+    
+</header>
+
+<script>
+// Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+// Click on the first tablink on load
+document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>
