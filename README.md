@@ -1,1 +1,0 @@
-# Socially_Conscious_Consumer_project
